@@ -135,22 +135,14 @@ public class PaparazziPlugin : Plugin<Project> {
         .artifactsFor(ArtifactType.ASSETS.type) { it !is ProjectComponentIdentifier }
         .artifactFiles
 
-      val packageAwareArtifactFiles = variant.runtimeConfiguration
-        .artifactsFor(ArtifactType.SYMBOL_LIST_WITH_PACKAGE_NAME.type)
-        .artifactFiles
-
       val writeResourcesTask = project.tasks.register(
         "preparePaparazzi${variantSlug}Resources",
         PrepareResourcesTask::class.java
       ) { task ->
         val android = project.extensions.getByType(BaseExtension::class.java)
-        val nonTransitiveRClassEnabled =
-          (project.findProperty("android.nonTransitiveRClass") as? String)?.toBoolean() ?: true
         val gradleHomeDir = projectDirectory.dir(project.gradle.gradleUserHomeDir.path)
 
         task.packageName.set(android.packageName())
-        task.artifactFiles.from(packageAwareArtifactFiles)
-        task.nonTransitiveRClassEnabled.set(nonTransitiveRClassEnabled)
         task.targetSdkVersion.set(android.targetSdkVersion())
 
         val localResourcePaths = localResourceDirs
