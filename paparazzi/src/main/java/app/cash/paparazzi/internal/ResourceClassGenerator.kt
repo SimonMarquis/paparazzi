@@ -10,7 +10,6 @@ import com.android.ide.common.resources.ResourceRepository
 import com.android.resources.ResourceType
 import com.android.resources.getFieldNameByResourceName
 import com.google.common.collect.Lists
-import com.google.common.collect.Maps
 import org.objectweb.asm.ClassWriter
 import org.objectweb.asm.MethodVisitor
 import org.objectweb.asm.Opcodes.ACC_FINAL
@@ -78,7 +77,7 @@ public class ResourceClassGenerator private constructor(
   private var idGeneratorGeneration = -1L
   private var myCache: MutableMap<ResourceType, MutableMap<String, Int>>? = null
 
-  /** For int[] in styleables. The ints in styleables are stored in [.myCache].  */
+  /** For int[] in styleables. The ints in styleables are stored in [myCache].  */
   private var styleableCache: MutableMap<String, ArrayList<Int>>? = null
 
   /**
@@ -87,7 +86,7 @@ public class ResourceClassGenerator private constructor(
   public fun generate(fqcn: String): ByteArray? {
     val className = fqcn.replace('.', '/')
     if (LOG.isLoggable(Level.INFO)) {
-      LOG.info(String.format("generate(%s)", className))
+      LOG.info("generate($className)")
     }
     val cw = ClassWriter(0) // Don't compute MAXS and FRAMES.
     cw.visit(
@@ -104,7 +103,7 @@ public class ResourceClassGenerator private constructor(
       val type = ResourceType.fromClassName(typeName)
       if (type == null) {
         if (LOG.isLoggable(Level.INFO)) {
-          LOG.info(String.format("  type '%s' doesn't exist", typeName))
+          LOG.info("  type '$typeName' doesn't exist")
         }
         return null
       }
