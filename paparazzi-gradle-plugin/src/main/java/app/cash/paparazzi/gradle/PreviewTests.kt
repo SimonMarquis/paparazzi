@@ -1,6 +1,10 @@
 package app.cash.paparazzi.gradle
 
-internal const val PREVIEW_TEST_SOURCE = """
+internal fun previewTestSource(
+  packageName: String,
+) = """
+package $packageName
+
 import app.cash.paparazzi.Paparazzi
 import app.cash.paparazzi.annotations.PaparazziPreviewData
 import app.cash.paparazzi.preview.DefaultLocaleRule
