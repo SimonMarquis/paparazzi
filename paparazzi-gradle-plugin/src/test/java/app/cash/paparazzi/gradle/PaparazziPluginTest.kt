@@ -691,6 +691,24 @@ class PaparazziPluginTest {
   }
 
   @Test
+  fun verifyMemory() {
+    val fixtureRoot = File("src/test/projects/verify-memory")
+
+    gradleRunner
+      // recordPaparazziDebug will fail with OutOfMemoryError
+      .withArguments("recordPaparazziDebug", "--stacktrace")
+
+      // verifyPaparazziDebug will succeed, while still creating the expected outputs
+      // paparazzi
+      // \- failures
+      //    \- app.cash.paparazzi.plugin.test_VerifyTest_verify.png
+      //     - delta-app.cash.paparazzi.plugin.test_VerifyTest_verify.png
+      // .withArguments("verifyPaparazziDebug", "--stacktrace")
+
+      .runFixture(fixtureRoot) { build() }
+  }
+
+  @Test
   fun verifySuccessMultiModule() {
     val fixtureRoot = File("src/test/projects/verify-mode-success-multiple-modules")
 
