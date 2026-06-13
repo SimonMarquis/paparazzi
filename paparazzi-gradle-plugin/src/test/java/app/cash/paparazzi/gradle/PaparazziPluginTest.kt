@@ -946,7 +946,6 @@ class PaparazziPluginTest {
     assertThat(config.mainPackage).isEqualTo("app.cash.paparazzi.plugin.test")
     assertThat(config.resourcePackageNames).containsExactly(
       "app.cash.paparazzi.plugin.test",
-      "app.cash.paparazzi.plugin.test",
       "com.example.mylibrary",
       "app.cash.paparazzi.plugin.test.module1",
       "app.cash.paparazzi.plugin.test.module2"
@@ -982,7 +981,6 @@ class PaparazziPluginTest {
     val config = resourcesFile.loadConfig()
     assertThat(config.mainPackage).isEqualTo("app.cash.paparazzi.plugin.test")
     assertThat(config.resourcePackageNames).containsExactly(
-      "app.cash.paparazzi.plugin.test",
       "app.cash.paparazzi.plugin.test",
       "com.example.mylibrary",
       "app.cash.paparazzi.plugin.test.module1",
