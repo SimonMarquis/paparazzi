@@ -24,6 +24,7 @@ include ':paparazzi-preview-processor'
 include ':paparazzi-preview-runtime'
 
 include ':sample'
+include ':lib'
 
 enableFeaturePreview('TYPESAFE_PROJECT_ACCESSORS')
 
